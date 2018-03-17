@@ -1,8 +1,8 @@
 package io.zipcoder;
 
 public class Item {
-    private String name;
-    private Double price;
+    private  String name;
+    private  Double price;
     private String type;
     private String expiration;
 
@@ -45,4 +45,5 @@ public class Item {
     public String toString(){
         return "name:" + name + " price:" + price + " type:" + type + " expiration:" + expiration;
     }
+
 }
