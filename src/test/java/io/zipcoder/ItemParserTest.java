@@ -5,6 +5,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import static org.junit.Assert.*;
 
@@ -59,4 +61,76 @@ public class ItemParserTest {
         Integer actual = itemParser.findKeyValuePairsInRawItemData(rawSingleItemIrregularSeperatorSample).size();
         assertEquals(expected, actual);
     }
+    @Test
+    public void findNameTest(){
+        String expected = "milk";
+        String actual = itemParser.findName(rawSingleItem);
+        Assert.assertEquals(expected,actual);
+    }
+    @Test
+    public void findPriceTest(){
+        String expected = "3.23";
+        String actual = itemParser.findPrice(rawSingleItem);
+        Assert.assertEquals(expected,actual);
+    }
+    @Test
+    public void findTypeTest(){
+        String expected = "food";
+        String actual = itemParser.findType(rawBrokenSingleItem);
+        Assert.assertEquals(expected,actual);
+    }
+    @Test
+    public void findExpirationDate(){
+        String expected = "1/11/2016";
+        String actual= itemParser.findExpirationDate(rawSingleItemIrregularSeperatorSample);
+        Assert.assertEquals(expected,actual);
+    }
+    @Test
+    public void buildMapTest1 ()throws Exception{
+        Map<String,ArrayList<Item>>testMap= new HashMap<String, ArrayList<Item>>();
+        testMap = itemParser.buildMap();
+        boolean actual = testMap.containsKey("milk");
+        Assert.assertTrue(actual);
+    }
+    @Test
+    public void buildMapTest2() throws Exception{
+        Map<String,ArrayList<Item>>testMap= new HashMap<String, ArrayList<Item>>();
+        testMap = itemParser.buildMap();
+        int expected = 4;
+        int actual = testMap.get("apples").size();
+        Assert.assertEquals(expected,actual);
+
+    }
+    @Test
+    public void getOccurencesOfItemsTest() throws ItemParseException {
+        ArrayList<Item>test = new ArrayList<Item>();
+
+        Item item1 = itemParser.parseStringIntoItem(rawSingleItem);
+        String rawItem2 =("naME:BreaD;price:1.23;type:Food;expiration:1/02/2016##");
+        Item item2 = itemParser.parseStringIntoItem(rawItem2);
+        test.add(item1);
+        test.add(item2);
+        int expected = 2;
+        int actual = itemParser.getOccurencesOfItems(test);
+        Assert.assertEquals(expected,actual);
+
+    }
+    @Test
+    public void getOccurencesOfPricesTest() throws ItemParseException {
+
+        ArrayList<Item>test = new ArrayList<Item>();
+
+        Item item1 = itemParser.parseStringIntoItem(rawSingleItem);
+        String rawItem2 =("naME:BreaD;price:1.23;type:Food;expiration:1/02/2016##");
+        String rawItem3 = "naMe:Bread;price:1.23;type:Food^expiration:1/11/2016##";
+        Item item2 = itemParser.parseStringIntoItem(rawItem2);
+        Item item3 = itemParser.parseStringIntoItem(rawItem3);
+        test.add(item1);
+        test.add(item2);
+        test.add(item3);
+        int expected =2;
+        int actual = itemParser.getOccurencesOfPrices(test,1.23);
+        Assert.assertEquals(expected,actual);
+    }
+
 }
