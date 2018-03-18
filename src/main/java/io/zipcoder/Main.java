@@ -25,24 +25,29 @@ public class Main {
         ArrayList<String> itemList = parser.parseRawDataIntoStringArray(output);
 
 
-        for (String item : itemList) {
-
-            //System.out.println(parser.parseRawDataIntoStringArray(main.readRawDataToString()));
-            // System.out.println(parser.parseStringIntoItem(item));
-        }
+//        for (String item : itemList) {
+//
+//            System.out.println(parser.parseRawDataIntoStringArray(main.readRawDataToString()));
+//             System.out.println(parser.parseStringIntoItem(item));
+//        }
 //        System.out.println(ItemParser.counter);
 //        Map<String, ArrayList<Item>> grocery = parser.getMap();
 //        for (String key : grocery.keySet()) {
 //            System.out.println(key);
 //        }
-        ArrayList<String> itemListCopy = parser.parseRawDataIntoStringArray(output);
-        for (Map.Entry<String, ArrayList<Item>> mapKey : parser.getMap().entrySet()) {
-            System.out.println(mapKey.getKey());
-            for (Item item : mapKey.getValue()) {
-                System.out.println(item.getPrice());
-            }
-        }
-        System.out.println(ItemParser.counter);
+//        ArrayList<String> itemListCopy = parser.parseRawDataIntoStringArray(output);
+//        for (Map.Entry<String, ArrayList<Item>> mapKey : parser.getMap().entrySet()) {
+//            System.out.println(mapKey.getKey());
+//            for (Item item : mapKey.getValue()) {
+//                System.out.println(item.getPrice());
+//            }
+//        }
+//        System.out.println(ItemParser.counter);
 
-    }
+
+        System.out.println(parser.generateReport());
+   }
+
+
+
 }
